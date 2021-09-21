@@ -1,5 +1,5 @@
 import numpy as np
-#SingleGateSets
+'''SingleGateSets Class'''
 class SingleGateSets:
     def __init__(self,theta=None):
         self.theta = theta

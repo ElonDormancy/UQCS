@@ -11,4 +11,3 @@ qubit = np.zeros(n)
 cir = []
 q = init_vector(qubit)
 q,cir = qft(q,cir)
-print(q)

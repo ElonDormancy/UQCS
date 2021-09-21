@@ -1,18 +1,30 @@
+"""Control Gate Module."""
 import numpy as np
-def i2b(k,n):
-    f = bin(k).replace('0b','')
-    while(len(f) < n):
-        f = "0"+ f
-    array = []
-    for i in f:
-        array.append(int(i))
-    return array
-def q2i(qubit):
-    str1 = ""
-    for i in qubit:
-        str1+=f"{i}"
-    return int(str1,2)
+from init import i2b
 def Control_Gate(q,ctrl,targ,gate,sym,cir):
+    '''
+    q:The vector form of the qubit(q = init_vector(qubit))
+    The length of qubit is L;And the length of q is 2^L;
+    
+    ctrl:The index of the control qubit
+
+    targ:The index of the targ qubit
+
+    gate:The type of Control Gate
+
+    sym: The symbol of the gate(The type of the sym is string)
+
+    cir:circuit
+
+        Example:
+    >>> from ControlGate import Control_Gate
+    >>> n=2,cir=[]
+    >>> qubit = np.zeros(n)
+    >>> q = init_vector(qubit)
+    >>> q,cir = Control_Gate(q,0,1,H,'H',cir)
+    >>> q
+    >>> array([0.70710678+0.j, 0.+0.j, 0.70710678+0.j, 0.+0.j])
+    '''
     cir.append((sym,targ,ctrl))
     qn = np.zeros(len(q),dtype=complex)
     def operator(qubit):
@@ -27,6 +39,7 @@ def Control_Gate(q,ctrl,targ,gate,sym,cir):
             ls.append([q[i],q[i+2**(n-targ-1)]])
             index.append([i,i+2**(n-targ-1)])
     ls = np.array(list(map(operator,ls)),dtype=complex)
+    #The part can be run parallelly
     for i in range(len(ls)):
         if i2b(index[i][0],n)[ctrl] == 1:
             qn[index[i][0]]=  ls[i][0]
