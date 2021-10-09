@@ -24,5 +24,5 @@ In order to speed up the for loop, the <omp.h> library is used:
 
 The Main idea to accelerate the Speed of QuantumSimulator is to accelerate the for loop,further I will use the MPI lib or CUDA(Or Other Libs) to do it.
 
-The Code above is a **mistake**,but it still provide a idea to accelerate the calculation speed of QS.
+The Code'algorithm above is a **mistake**,but it still provide a idea to accelerate the calculation speed of QS.
 
