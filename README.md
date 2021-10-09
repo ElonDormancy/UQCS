@@ -1,6 +1,6 @@
 # QuantumSimulator
 QuantumSimulator with plot
-The Quantum Simulator coded with python but it can be improved by using fortran and Parallel Computing
+The Quantum Simulator coded with python but it can be improved by using fortran/C++ and Parallel Computing
 
 ## V1.0 Python
 
@@ -11,5 +11,18 @@ Example:https://github.com/ElonDormancy/QuantumSimulator/blob/main/QS/Example.ip
 ## V2.0 C++
 [C++ Single Gate Matrix Version](https://github.com/ElonDormancy/QuantumSimulator/tree/main/QSC%2B%2B)
 
-## V3.0 C++ with cuBLAS
+In order to speed up the for loop, the <omp.h> library is used:
+
+### C++ with OMP
+
+[C++ Version with OMP](https://github.com/ElonDormancy/QuantumSimulator/tree/main/QSC%2B%2BOMP)
+
+
+### C++ with cuBLAS
+
+[C++ Version with cuBLAS](https://github.com/ElonDormancy/QuantumSimulator/tree/main/QSC%2B%2BcuBLAS)
+
+The Main idea to accelerate the Speed of QuantumSimulator is to accelerate the for loop,so further I will use the MPI lib or further CUDA to do it.
+
+The Code below is a **mistake**,but it still provide a idea to accelerate the calculation spedd of QS.
 
