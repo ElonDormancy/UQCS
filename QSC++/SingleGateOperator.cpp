@@ -1,7 +1,6 @@
 #include "datatypes.h"
 #include <string>
 #include <Eigen\Dense>
-#include <Eigen\Core>
 #include "SingleGateOperator.h"
 #include <vector> 
 using namespace Eigen;
@@ -19,14 +18,14 @@ VectorC mat_trans2vector(MatrixXd mat_order, MatrixC mat)
     }
     return vec;
 };
-VectorC SGateOperator(VectorC vec_state, u_int index, gate SGate)
+
+VectorC SGateOperator(VectorC vec_state, u_int index, gate Gate)
 {
     u_int n = vec_state.size();
     u_int m = log2(n);
     u_int n2 = n / 2;
-    d_complex** mat = new d_complex * [2];
-    for (int i = 0; i < 2; i++)
-        mat[i] = new d_complex[n2];
+    MatrixC mat = MatrixXd::Zero(2, n2);
+    MatrixXd mat_order = MatrixXd::Zero(2, n2);
     vector<int> v;
     vector<int> powv;
     for (int i = 0; i < n; i++)
@@ -40,11 +39,15 @@ VectorC SGateOperator(VectorC vec_state, u_int index, gate SGate)
         int k = *itr + pow(2, (m - index - 1));
         if (!(count(powv.begin(), powv.end(), *itr)))
         {
-            mat[0][j]= vec_state(*itr);
-            mat[1][j] = vec_state(k);
+            mat(0, j) = vec_state(*itr);
+            mat(1, j) = vec_state(k);
+            mat_order(0, j) = *itr;
+            mat_order(1, j) = k;
             powv.push_back(k);
             j++;
         };
     };
-    return ;
+    return mat_trans2vector(mat_order, Gate * mat);
 };
+
+

@@ -3,11 +3,11 @@ SingleGate::SingleGate()
 {
 	I = gate::Zero(2, 2);
 	I << 1, 0,
-		0, 1;
+		 0, 1;
 
 	X = gate::Zero(2, 2);
 	X << 0, 1,
-		1, 0;
+		 1, 0;
 
 	Y = gate::Zero(2, 2);
 	Y << 0, d_complex{ 0, -1 },
@@ -26,7 +26,7 @@ SingleGate::SingleGate()
 		0, d_complex{ 0, 1 };
 	Sd = gate::Zero(2, 2);
 	S << 1, 0,
-		0, d_complex{ 0, 1 };
+		 0, d_complex{ 0, 1 };
 	T = gate::Zero(2, 2);
 	T << 1, 0,
 		0, exp(d_complex{ 0, PI / 4 });

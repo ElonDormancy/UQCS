@@ -7,19 +7,18 @@
 using namespace Eigen;
 using namespace std;
 
-string i2b(int n, int qubit_number)
+string i2b(int n)
 {
     string r;
-    for (int i=0; i < qubit_number; i++)
-    {
-        r += (n % 2 == 0 ? "1" : "0");
+    while (n != 0) {
+        r += (n % 2 == 0 ? "0" : "1");
         n /= 2;
     }
     return r;
 }
 
 
-VectorC mat_trans2vec(MatrixXd mat_order, MatrixC mat)
+VectorC mat_trans2vector(MatrixXd mat_order, MatrixC mat)
 {
     u_int n = mat.size();
     Map<RowVectorXd> v_order(mat_order.data(), n);
@@ -34,7 +33,7 @@ VectorC mat_trans2vec(MatrixXd mat_order, MatrixC mat)
 };
 
 
-VectorC CGateOperator(VectorC vec_state, u_int ctrl, u_int targ, gate Gate)
+VectorC CGateOperator(VectorC vec_state, u_int ctrl,u_int targ, gate Gate)
 {
     u_int n = vec_state.size();
     u_int m = log2(n);
@@ -53,28 +52,30 @@ VectorC CGateOperator(VectorC vec_state, u_int ctrl, u_int targ, gate Gate)
 
         int k = *itr + pow(2, (m - targ - 1));
         if (!(count(powv.begin(), powv.end(), *itr)))
-        {   
-            if (i2b(*itr, m)[ctrl] == 49)
+        {
+            if (i2b(*itr).at(ctrl) == 1)
             {
-                MatrixC temp = MatrixXd::Zero(2, 1);
-                temp(0, 0) = vec_state(*itr);
-                temp(1, 0) = vec_state(k);
+                MatrixC temp = MatrixXd::Zero(0,2);
+                temp(0,0) = vec_state(*itr);
+                temp(0,1) = vec_state(k);
                 MatrixC state = Gate * temp;
-                mat(0, j) = state(0, 0);
-                mat(1, j) = state(1, 0);
-                
+                mat(0, j) = state(0,0);
+                mat(1, j) = state(0,1);
+                mat_order(0, j) = *itr;
+                mat_order(1, j) = k;
+                powv.push_back(k);
+                j++;
             }
             else
             {
                 mat(0, j) = vec_state(*itr);
                 mat(1, j) = vec_state(k);
+                mat_order(0, j) = *itr;
+                mat_order(1, j) = k;
+                powv.push_back(k);
+                j++;
             }
-            mat_order(0, j) = *itr;
-            mat_order(1, j) = k;
-            powv.push_back(k);
-            j++;
         };
     };
-    return mat_trans2vec(mat_order, mat);
+    return mat_trans2vector(mat_order, mat);
 };
-
