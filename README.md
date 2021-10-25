@@ -29,3 +29,6 @@ The Code'algorithm above is a **mistake**,but it still provide a idea to acceler
 ## Drag-Drop Plot
 
 Drag to plot the quantum circuit and render by [qviz](https://github.com/microsoft/quantum-viz.js)
+
+Try it by yourself
+https://elondormancy.github.io/QuantumSimulator/
