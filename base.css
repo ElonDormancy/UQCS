@@ -1,0 +1,135 @@
+.Navbars {
+    width: 500px;
+    height: 60px;
+    background-color: burlywood;
+}
+
+.Navbar {
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    display: inline-block;
+    margin: 10px;
+    border-bottom: 5px solid brown;
+    text-decoration: none;
+
+}
+
+.Navbar:hover {
+    background-color: rgb(204, 204, 204);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: arial;
+    font-size: 18px;
+}
+
+.draggable {
+    position: relative;
+    background-color: hotpink;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+
+.dragging {
+    background-color: blue;
+}
+
+.row {
+    display: inline-block;
+}
+
+.col {
+    display: block;
+}
+
+.invisible {
+    display: none;
+}
+
+.ctrlgate {
+    height: 60px;
+    width: 122px;
+    margin: 2px;
+    border: 2px black solid;
+    background-color: white;
+    display: inline-block;
+}
+
+.droppable {
+    height: 50px;
+    width: 50px;
+    margin: 2px;
+    border: 2px black solid;
+    background-color: white;
+    display: inline-block;
+}
+
+.noplace {
+    height: 50px;
+    width: 50px;
+    margin: 2px;
+    border: 2px black solid;
+    display: inline-block;
+    background-color: red;
+}
+
+.cols {
+    white-space: nowrap;
+}
+
+.qubit {
+    cursor: pointer;
+}
+
+.gate {
+    height: 50px;
+    width: 50px;
+    margin: 2px;
+    border: 2px black solid;
+    background-color: white;
+    display: inline-block;
+}
+
+.input {
+    width: 100px;
+    margin: 10px;
+}
+
+.drag-over {
+    background-color: grey;
+}
+
+#X {
+    background-image: url('./images/X.svg');
+}
+
+#Y {
+    background-image: url('./images/Y.svg');
+}
+
+#Z {
+    background-image: url('./images/Z.svg');
+}
+
+#H {
+    background-image: url('./images/H.svg');
+}
+
+#ctrl {
+    background-image: url('./images/Ctrl.svg');
+}
+
+#CtrlX {
+    background-image: url('./images/CtrlX.svg');
+}
+
+button {
+    margin: 10px;
+    width: 100px;
+}
