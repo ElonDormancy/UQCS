@@ -26,3 +26,6 @@ The Main idea to accelerate the Speed of QuantumSimulator is to accelerate the f
 
 The Code'algorithm above is a **mistake**,but it still provide a idea to accelerate the calculation speed of QS.
 
+## Drag-Drop Plot
+
+Drag to plot the quantum circuit and render by [qviz](https://github.com/microsoft/quantum-viz.js)
