@@ -456,7 +456,6 @@ function banplace(ctrlgatescontainer) {
     var xs = []
     for (var c of ctrlgatescontainer) {
         var cg = c["gateinfor"]
-        console.log(cg)
         noplace(cg["ctrl"]["xindex"], cg["ctrl"]["yindex"], cg["ctrlgate"]["yindex"])
         xs.push(cg["ctrl"]["xindex"])
     }
