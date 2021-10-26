@@ -479,7 +479,6 @@ function noplace(indexx, ctrly, ctrlgatey) {
 }
 
 function place(indexxs) {
-    console.log("OK")
     var noplaces = document.querySelectorAll(".noplace")
     for (var nop of noplaces) {
         var x = nop.getAttribute("data-cols")
