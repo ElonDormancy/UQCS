@@ -23,12 +23,12 @@
             <a href="#">About</a>
         </div>
     </div>
-    <div>
+    <div class="init">
         <input type="text" min="0" class="input" value="rows" id="rowsinput" />
         <input type="text" min="0" class="input" value="cols" id="colsinput" />
         <button id="btn">Start/Restart</button>
     </div>
-    <div>
+    <div class="init">
         <button class="add" id="addrow" onclick="addrow()">AddRow</button>
         <button class="add" id="addcol" onclick="addcol()">AddCol</button>
         <button class="delete" id="deleterow" onclick="deleterow()">DeleteRow</button>
@@ -36,6 +36,7 @@
     </div>
     <div class="gatesets">
         <div class="singlegate">
+            <div class="gatesec">Singale Gate</div>
             <div class="gate X">
                 <div class="draggable   " draggable="true" id="X" data-control="false"></div>
             </div>
@@ -50,6 +51,7 @@
             </div>
         </div>
         <div class="controlgate">
+            <div class="gatesec">Control Gate</div>
             <div class="ctrlgate" id="cnot">
                 <div class="gate ctrl">
                     <div class="draggable" draggable="true" id="ctrl" data-control="true"></div>
@@ -76,6 +78,6 @@
     </div>
 </body>
 <script src="./script.js"></script>
-<script src="./drawquantum.js"></script>
+
 
 </html>

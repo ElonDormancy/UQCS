@@ -27,6 +27,12 @@ a {
     font-size: 18px;
 }
 
+.init {
+    width: 500px;
+    background-color: antiquewhite;
+}
+
+
 .draggable {
     position: relative;
     background-color: hotpink;
@@ -129,7 +135,17 @@ a {
     background-image: url('./images/CtrlX.svg');
 }
 
+.gatesec {
+    font-size: 18px;
+    margin: 2px;
+}
+
+
 button {
     margin: 10px;
     width: 100px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 2px;
+    cursor: pointer;
 }
