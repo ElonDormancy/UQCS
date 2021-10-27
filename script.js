@@ -282,14 +282,17 @@ function dragOver(e) {
 }
 
 function dragEnter(e) {
+    e.preventDefault();
     this.className += ' drag-over';
 }
 
 function dragLeave(e) {
+    e.preventDefault();
     this.className = 'droppable row';
 }
 
 function dragDrop(e) {
+    e.preventDefault();
     this.className = 'droppable row';
     var dragitem = document.querySelector(".dragging")
     var gateClass = dragitem.getAttribute("id")
