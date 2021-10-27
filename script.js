@@ -11,7 +11,9 @@ var qvizdraw = {
         // },
     ],
 };
-
+(event) => {
+    event.preventDefault();
+}
 const getrows = document.getElementById("rowsinput")
 const getcols = document.getElementById("colsinput")
 const gatesets = document.querySelectorAll(".gatesets")
@@ -30,18 +32,18 @@ document.querySelector("#deletecol").disabled = true;
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 getrows.onfocus = function () {
-    if (this.value == "rows") {
+    if (this.value == "Rows") {
         this.value = ""
     }
 };
 getrows.onblur = function () {
     if (this.value == "") {
-        this.value = "rows"
+        this.value = "Rows"
     }
 }
 
 getcols.onfocus = function () {
-    if (this.value == "cols") {
+    if (this.value == "Cols") {
         this.value = ""
     }
 };
@@ -49,7 +51,7 @@ getcols.onfocus = function () {
 
 getcols.onblur = function () {
     if (this.value == "") {
-        this.value = "cols"
+        this.value = "Cols"
     }
 }
 
@@ -73,17 +75,19 @@ function stringIze(obj) {
 btn.onclick = function () {
     var rows = getrows.value
     var cols = getcols.value
-    createcanvas(rows, cols)
-    var addrow = document.querySelector("#addrow")
-    var addcol = document.querySelector("#addcol")
-    var deleterow = document.querySelector("#deleterow")
-    var deletecol = document.querySelector("#deletecol")
-    addrow.disabled = false
-    addcol.disabled = false
-    deleterow.disabled = false
-    deletecol.disabled = false
-    getcols.disabled = false
-    getrows.disabled = false
+    if (rows != "Rows" && cols != "Cols") {
+        createcanvas(rows, cols)
+        var addrow = document.querySelector("#addrow")
+        var addcol = document.querySelector("#addcol")
+        var deleterow = document.querySelector("#deleterow")
+        var deletecol = document.querySelector("#deletecol")
+        addrow.disabled = false
+        addcol.disabled = false
+        deleterow.disabled = false
+        deletecol.disabled = false
+        getcols.disabled = false
+        getrows.disabled = false
+    }
 }
 
 function restart() {
@@ -245,10 +249,22 @@ function draggingall(temp) {
 }
 function dragStart() {
     this.className += ' dragging';
+    var temp = this.parentNode;
+    var tmp = temp.parentNode;
+    if ((this.id == "ctrl" || this.id == "CtrlX") && tmp.className == "ctrlgate") {
+        var nos = document.querySelectorAll(".ctrlline")
+        for (var no of nos) {
+            no.className = "noplace"
+        }
+    }
 
 }
 function dragEnd() {
     this.className = 'draggable';
+    var nos = document.querySelectorAll(".noplace")
+    for (var no of nos) {
+        no.className = "ctrlline"
+    }
 }
 
 function droplisten(droppables) {
@@ -456,6 +472,7 @@ function banplace(ctrlgatescontainer) {
     var xs = []
     for (var c of ctrlgatescontainer) {
         var cg = c["gateinfor"]
+        console.log(cg)
         noplace(cg["ctrl"]["xindex"], cg["ctrl"]["yindex"], cg["ctrlgate"]["yindex"])
         xs.push(cg["ctrl"]["xindex"])
     }
@@ -472,13 +489,13 @@ function noplace(indexx, ctrly, ctrlgatey) {
         var check2 = (y < parseInt(ctrly) && y > parseInt(ctrlgatey))
         var allc = (check1 || check2)
         if (x == indexx && allc) {
-            drop.className = "noplace"
+            drop.className = "ctrlline"
         }
     }
 }
 
 function place(indexxs) {
-    var noplaces = document.querySelectorAll(".noplace")
+    var noplaces = document.querySelectorAll(".ctrlline")
     for (var nop of noplaces) {
         var x = nop.getAttribute("data-cols")
         if (indexxs.indexOf(x) == -1) {
@@ -486,93 +503,6 @@ function place(indexxs) {
         }
     }
 }
-// function totoaldrawqc() {
-//     var draggables = document.querySelectorAll(".draggable")
-//     gateinformation = []
-//     qvizdraw["operations"] = []
-//     GetAxis(draggables)
-//     for (var sgate of gateinformation) {
-//         var gateinfo = {
-//             gate: '',
-//             isControlled: false,
-//             targets: [],
-//             controls: []
-//         }
-//         gateinfo['gate'] = sgate['gateclass']
-//         if (sgate['iscontrol']) {
-//             gateinfo['isControlled'] = sgate['iscontrol']
-//             gateinfo['controls'] = []
-//         }
-//         gateinfo['targets'] = [{ qId: sgate['yindex'] }]
-//         qvizdraw["operations"].push(gateinfo)
-//         console.log(qvizdraw)
-//         drawQC()
-//     }
-// }
 
-
-
-// setTimeout(() => {
-//     var tmp = document.querySelector(".dragging")
-//     if (tmp.id == "ctrl") {
-//         ctrlsetsx = []
-//         ctrlsetsy = []
-//         var draggables = document.querySelectorAll(".draggable")
-//         let counts = (arr, value) => arr.reduce((a, v) => v === value ? a + 1 : a + 0, 0);
-//         for (var i = 0; i < draggables.length; i++) {
-//             var dragging = draggables[i]
-//             var pcol = dragging.parentNode;
-//             var prow = pcol.parentNode
-//             var xi = pcol.getAttribute("data-cols")
-//             var yi = prow.getAttribute("data-rows");
-//             ctrlsetsx.push(xi)
-//             ctrlsetsy.push(yi)
-//         }
-//         for (var j = 0; j < ctrlsetsx.length; j++) {
-//             if (ctrlsetsx[j] != null) {
-//                 if (counts(ctrlsetsx, ctrlsetsx[j]) >= 2) {
-//                     var xno = ctrlsetsx[j]
-//                     var yno = ctrlsetsy[j]
-//                     var droppitems = document.querySelectorAll(".droppable")
-//                     for (var i = 0; i < droppitems.length; i++) {
-//                         var xnos = droppitems[i].getAttribute("data-cols")
-//                         if (xnos == xno) {
-//                             droppitems[i].drop = false
-//                             droppitems[i].className = "noplacement"
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-
-//     }
-
-// }, 0);
-
-// var index = 0
-//             if (sgate['gateclass'] != "ctrl") {
-//                 gateinfocontrol['opera']['gate'] = sgate['gateclass']
-//                 gateinfocontrol['opera']['targets'] = [{ qId: sgate['yindex'] }]
-//                 index = sgate['xindex']
-//                 gateinfocontrol['indexox'] = index
-//             }
-//             else {
-//                 if (index == sgate['xindex']) {
-//                     gateinfocontrol['opera']['controls'] = [{ qId: sgate['yindex'] }]
-//                     gateinfocontrol['opera']['isControlled'] = sgate['iscontrol']
-//                 }
-//             }
-//             if (gateinfocontrol['opera']['gate'] != "" && gateinfocontrol['opera']['isControlled'] == "true") {
-//                 qvizdraw["operations"].push(gateinfocontrol['opera'])
-//                 var gateinfocontrol = {
-//                     indexox: '-1',
-//                     opera: {
-//                         gate: '',
-//                         targets: [],
-//                         controls: [],
-//                         isControlled: false,
-//                     }
-//                 }
-//             }
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------

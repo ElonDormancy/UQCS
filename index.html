@@ -14,18 +14,18 @@
 <body>
     <div class="Navbars">
         <div class="Navbar" id="Meau">
-            <a href="#" onclick="set()">Meau</a>
+            <a href="#" class="nav" onclick="set()">Meau</a>
         </div>
         <div class="Navbar" id="Compile">
-            <a href="#" onclick="compile()">Compile</a>
+            <a href="#" class="nav" onclick="compile()">Compile</a>
         </div>
         <div class="Navbar" id="About">
-            <a href="#">About</a>
+            <a href="#" class="nav" onclick="about()">About</a>
         </div>
     </div>
     <div class="init">
-        <input type="text" min="0" class="input" value="rows" id="rowsinput" />
-        <input type="text" min="0" class="input" value="cols" id="colsinput" />
+        <input type="text" min="0" class="input" value="Rows" id="rowsinput" />
+        <input type="text" min="0" class="input" value="Cols" id="colsinput" />
         <button id="btn">Start/Restart</button>
     </div>
     <div class="init">
@@ -77,6 +77,19 @@
         <div id='qvizdraw'></div>
     </div>
 </body>
+<link rel="stylesheet" href="libs/default.css">
+<script src="libs/index.min.js"></script>
+<!--optional import of scroll behaviour-->
+<script src="libs/scroll-behaviour.min.js"></script>
+
+<script>
+    // options are optional ;)
+    MobileDragDrop.polyfill({
+        // use this to make use of the scroll behaviour
+        dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+    });
+</script>
+
 <script src="./script.js"></script>
 
 

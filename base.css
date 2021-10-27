@@ -16,13 +16,17 @@
 
 }
 
-.Navbar:hover {
-    background-color: rgb(204, 204, 204);
+
+.nav:hover {
+    color: black;
+    font-weight: 700;
+    font-family: arial;
+    font-size: 18px;
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: gray;
     font-family: arial;
     font-size: 18px;
 }
@@ -77,6 +81,16 @@ a {
 }
 
 .noplace {
+    background-image: url('./images/Banlogo.svg');
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    margin: 2px;
+    border: 2px black solid;
+
+}
+
+.ctrlline {
     height: 50px;
     width: 50px;
     margin: 2px;
@@ -102,10 +116,7 @@ a {
     display: inline-block;
 }
 
-.input {
-    width: 100px;
-    margin: 10px;
-}
+
 
 .drag-over {
     background-color: grey;
@@ -148,4 +159,10 @@ button {
     font-size: 12px;
     border-radius: 2px;
     cursor: pointer;
+}
+
+
+.input {
+    margin: 10px;
+    width: 100px;
 }
