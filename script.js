@@ -141,6 +141,7 @@ function addcol() {
     setTimeout(() => {
         droppablesvar = document.querySelectorAll('.droppable')
         droplisten(droppablesvar)
+        totoaldrawqc(totoalqcinfor())
     }, 0);
 
 }
@@ -190,7 +191,9 @@ function deleterow() {
     var qubits = qvizdraw["qubits"]
     qubits.pop()
     qvizdraw["qubits"] = qubits
-    totoaldrawqc(totoalqcinfor())
+    setTimeout(() => {
+        totoaldrawqc(totoalqcinfor())
+    }, 0);
 }
 
 function deletecol() {
@@ -198,10 +201,12 @@ function deletecol() {
     if (colslen <= 3) {
         document.querySelector("#deletecol").disabled = true;
     }
-    var temps = document.querySelectorAll(".cols")
+    var temps = document.getElementsByClassName("cols")
+    console.log(temps)
     for (var i = 0; i < temps.length; i++) {
         var temp = temps[i].querySelectorAll(".droppable")
-        temp[colslen - 2].remove()
+        var len = temp.length
+        temp[len - 1].remove()
     }
     setTimeout(() => {
         totoaldrawqc(totoalqcinfor())
@@ -362,8 +367,8 @@ function totoaldrawqc(qcinfor) {
     var cgs = qcinfor["cg"]
     var inforcontainer = []
     qvizdraw["operations"] = []
-    var rows = document.querySelectorAll(".cols")
-    for (var i = 0; i < rows.length + 1; i++) {
+    var cols = document.querySelector(".cols").childElementCount
+    for (var i = 0; i < cols - 1; i++) {
         var container = {
             index: 0,
             gates: [],
@@ -383,6 +388,7 @@ function totoaldrawqc(qcinfor) {
         container["gates"] = everycol
         inforcontainer.push(container)
     }
+    console.log(inforcontainer)
     for (var i = 0; i < inforcontainer.length; i++) {
         for (var j = 0; j < inforcontainer[i]["gates"].length; j++) {
             var gs = inforcontainer[i]["gates"]
@@ -411,6 +417,7 @@ function totoaldrawqc(qcinfor) {
             }
         }
     }
+    console.log(qvizdraw["operations"])
     drawQC()
 }
 // for (var i = 0; i < inforcontainer.length; i++) {
