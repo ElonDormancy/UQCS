@@ -80,7 +80,7 @@ a {
     display: inline-block;
 }
 
-.noplace {
+.noplacement {
     background-image: url('./images/Banlogo.svg');
     height: 50px;
     width: 50px;
