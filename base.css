@@ -72,10 +72,10 @@ a {
 }
 
 .droppable {
+    background-image: url('./images/Line.svg');
     height: 50px;
     width: 50px;
     margin: 2px;
-    border: 2px black solid;
     background-color: white;
     display: inline-block;
 }
@@ -86,17 +86,15 @@ a {
     width: 50px;
     display: inline-block;
     margin: 2px;
-    border: 2px black solid;
 
 }
 
 .ctrlline {
+    background-image: url('./images/ctrlline.svg');
     height: 50px;
     width: 50px;
     margin: 2px;
-    border: 2px black solid;
     display: inline-block;
-    background-color: red;
 }
 
 .cols {
@@ -116,10 +114,10 @@ a {
     display: inline-block;
 }
 
-
-
 .drag-over {
+    background-image: none;
     background-color: grey;
+    opacity: 50%;
 }
 
 #X {
