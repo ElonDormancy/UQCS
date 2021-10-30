@@ -1,3 +1,4 @@
+[![](https://img.shields.io/badge/Platform-Python-lightgrey)](https://www.python.org/)  [![](https://img.shields.io/badge/Platform-C%2FC%2B%2B-lightgrey)](https://www.cplusplus.com/)
 # QuantumSimulator
 QuantumSimulator with plot
 The Quantum Simulator coded with python but it can be improved by using fortran/C++ and Parallel Computing
