@@ -16,6 +16,9 @@
 
 }
 
+#display {
+    margin-left: 10px;
+}
 
 .nav:hover {
     color: black;

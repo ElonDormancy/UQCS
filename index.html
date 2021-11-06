@@ -20,7 +20,7 @@
             <a href="#" class="nav" onclick="compile()">Compile</a>
         </div>
         <div class="Navbar" id="About">
-            <a href="#" class="nav" onclick="about()">About</a>
+            <a href="https://github.com/ElonDormancy/QuantumSimulator" class="nav">About</a>
         </div>
     </div>
     <div class="init">
@@ -76,12 +76,13 @@
     <div id="qvizarea">
         <div id='qvizdraw'></div>
     </div>
-</body>
-<link rel="stylesheet" href="libs/default.css">
-<script src="libs/index.min.js"></script>
-<!--optional import of scroll behaviour-->
-<script src="libs/scroll-behaviour.min.js"></script>
+    <div id="display"></div>
 
+</body>
+<link rel="stylesheet" href="./libs/default.css">
+<script src="./libs/index.min.js"></script>
+<!--optional import of scroll behaviour-->
+<script src="./libs/scroll-behaviour.min.js"></script>
 <script>
     // options are optional ;)
     MobileDragDrop.polyfill({
@@ -89,8 +90,13 @@
         dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
     });
 </script>
-
+<script src="./libs/math.js"></script>
+<script src="./operator.js"></script>
 <script src="./script.js"></script>
+<script src="./libs/d3.min.js"></script>
+<script src="./display.js"></script>
+<script src="./complie.js"></script>
+
 
 
 </html>

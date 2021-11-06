@@ -146,7 +146,7 @@ function addrow() {
     var cols = document.querySelector(".cols").childElementCount
     var arr1 = [];
     var qubitnum = document.querySelectorAll(".qubit")
-    arr1.push(`<img data-index="${qubitnum.length}" class="qubit" src="./images/ket0.svg" alt="\ket{0}" height="50px" width="50px" />`)
+    arr1.push(`<img data-index="0" data-qindex="${qubitnum.length}" class="qubit" src="./images/ket0.svg" alt="\ket{0}" height="50px" width="50px" />`)
     for (var i = 0; i < cols - 1; i++) {
         arr1.push(`<div class="droppable row" data-cols = "${i}"></div>`);
     }
@@ -240,7 +240,6 @@ function deletecol() {
         totoaldrawqc(totoalqcinfor())
     }, 0);
 }
-
 //CLICK TO REVERSE THE QUBIT
 function qubitreverse(qubits) {
     for (var qubit of qubits) {
@@ -248,13 +247,18 @@ function qubitreverse(qubits) {
     }
 }
 function qreverse() {
+    var row = this.parentNode.getAttribute("data-rows")
+    var temp = document.querySelectorAll("#qvizdraw> svg >text ")
+    var qubit= temp[row]
     if (this.getAttribute("data-index") == 0) {
         this.setAttribute("src", "./images/ket1.svg")
         this.setAttribute("data-index", 1)
+        qubit.innerHTML = "|1⟩"
     }
     else {
         this.setAttribute("src", "./images/ket0.svg")
         this.setAttribute("data-index", 0)
+        qubit.innerHTML = "|0⟩"
     }
 }
 
@@ -528,7 +532,6 @@ function ctrlplace(ctrlgatescontainer) {
     var xs = []
     for (var c of ctrlgatescontainer) {
         var cg = c["gateinfor"]
-        console.log(cg)
         noplacement(cg["ctrl"]["xindex"], cg["ctrl"]["yindex"], cg["ctrlgate"]["yindex"])
         xs.push(cg["ctrl"]["xindex"])
     }
@@ -567,6 +570,8 @@ function placement(indexxs) {
         }
     }
 }
+
+
 
 
 
