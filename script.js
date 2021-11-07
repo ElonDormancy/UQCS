@@ -13,7 +13,6 @@ var qvizdraw = {
     qubits: [],
     operations: [],
 };
-const compilenav = document.querySelector("#Compile > a")
 //Initialize the navigation bar
 const getrows = document.getElementById("rowsinput")
 const getcols = document.getElementById("colsinput")
@@ -25,7 +24,6 @@ document.querySelector("#addrow").disabled = true;
 document.querySelector("#addcol").disabled = true;
 document.querySelector("#deleterow").disabled = true;
 document.querySelector("#deletecol").disabled = true;
-compilenav.disabled = true;
 
 getrows.onfocus = function () {
     if (this.value == "Rows") {
@@ -115,6 +113,7 @@ function Initialize(rows, cols) {
             droplisten(droppablesvar)
             qubitreverse(qubits)
             totoaldrawqc(totoalqcinfor())
+            compile()
         }, 0);
     }, 0);
 }
@@ -135,6 +134,7 @@ function addcol() {
         droppablesvar = document.querySelectorAll('.droppable')//CHANGE THE GLOBAL VARS
         droplisten(droppablesvar)
         totoaldrawqc(totoalqcinfor())
+        compile()
     }, 0);
 
 }
@@ -169,6 +169,7 @@ function addrow() {
         droplisten(droppablesvar)
         qubitreverse(qubits)
         totoaldrawqc(totoalqcinfor())
+        compile()
     }, 0);
 }
 
@@ -222,6 +223,7 @@ function deleterow() {
     setTimeout(() => {
         DeleteSingleCtrl()
         totoaldrawqc(totoalqcinfor())
+        compile()
     }, 0);
 }
 
@@ -231,7 +233,6 @@ function deletecol() {
         document.querySelector("#deletecol").disabled = true;
     }
     var temps = document.getElementsByClassName("cols")
-    console.log(temps)
     for (var i = 0; i < temps.length; i++) {
         var temp = temps[i].querySelectorAll(".droppable")
         var len = temp.length
@@ -239,6 +240,7 @@ function deletecol() {
     }
     setTimeout(() => {
         totoaldrawqc(totoalqcinfor())
+        compile()
     }, 0);
 }
 //CLICK TO REVERSE THE QUBIT
@@ -255,11 +257,17 @@ function qreverse() {
         this.setAttribute("src", "./images/ket1.svg")
         this.setAttribute("data-index", 1)
         qubit.innerHTML = "|1⟩"
+        setTimeout(() => {
+            UpdateData()
+        }, 0);
     }
     else {
         this.setAttribute("src", "./images/ket0.svg")
         this.setAttribute("data-index", 0)
         qubit.innerHTML = "|0⟩"
+        setTimeout(() => {
+            UpdateData()
+        }, 0);
     }
 }
 
@@ -346,6 +354,49 @@ function dragLeave(e) {
     }
 
 }
+function compile() {
+    var len = document.getElementsByClassName("cols").length
+    if (len > 6) {
+        var draw = document.getElementById("display")
+        draw.innerHTML = ""
+    }
+    else {
+        var vec = init_vec(GetInitQubits())
+        var ret = applygate(vec, GetApplyList())
+        var alphabet = GetFrequency(ret)
+        console.log(alphabet)
+        var draw = document.getElementById("display")
+        draw.innerHTML = ""
+        chart = BarChart(alphabet, {
+            x: d => d.qubit,
+            y: d => d.frequency,
+            yFormat: "%",
+            yLabel: "↑ Frequency",
+            height: 400,
+            color: "#69b3a2"
+        })
+    }
+}
+
+function UpdateData() {
+    var len = document.getElementsByClassName("cols").length
+    if (len > 6) {
+        return ""
+    }
+    else {
+        var vec = init_vec(GetInitQubits())
+        var ret = applygate(vec, GetApplyList())
+        var alphabet = GetFrequency(ret)
+        update = chart.update(alphabet, {
+            x: d => d.qubit,
+            y: d => d.frequency,
+            yFormat: "%",
+            yLabel: "↑ Frequency",
+            height: 400,
+            color: "#69b3a2"
+        })
+    }
+}
 
 function dragDrop(e) {
     e.preventDefault()
@@ -374,6 +425,7 @@ function dragDrop(e) {
         draggablesvar = document.querySelectorAll(".draggable")
         draggingall(draggablesvar)
         totoaldrawqc(totoalqcinfor())
+        UpdateData()
     }, 0);
 
 }

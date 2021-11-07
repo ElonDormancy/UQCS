@@ -1,7 +1,15 @@
 .Navbars {
-    width: 500px;
+    width: 1000px;
     height: 60px;
     background-color: burlywood;
+}
+
+
+.Navbars>a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
 }
 
 .Navbar {
@@ -18,8 +26,6 @@
 
 #display {
     margin-left: 10px;
-    border: 2px black solid;
-    width: 840px;
 }
 
 .nav:hover {
@@ -29,7 +35,7 @@
     font-size: 18px;
 }
 
-a {
+.Navbar>a {
     text-decoration: none;
     color: gray;
     font-family: arial;
@@ -37,7 +43,7 @@ a {
 }
 
 .init {
-    width: 500px;
+    width: 1000px;
     background-color: antiquewhite;
 }
 
@@ -76,6 +82,16 @@ a {
     display: inline-block;
 }
 
+p {
+    font-family: "PT Serif", 'Times New Roman', Times;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+#content {
+    margin-left: 2px;
+}
+
 .droppable {
     background-image: url('./images/Line.svg');
     height: 50px;
@@ -94,9 +110,8 @@ a {
 
 }
 
-.gatesets {
-    width: 496px;
-    border: 2px black solid;
+h2 {
+    margin-left: 2px;
 }
 
 .ctrlline {
@@ -154,6 +169,13 @@ a {
     background-image: url('./images/CtrlX.svg');
 }
 
+#d3js {
+    background-image: url('./images/d3logo.svg');
+}
+
+
+
+
 .gatesec {
     font-size: 18px;
     margin: 2px;
@@ -173,4 +195,14 @@ button {
 .input {
     margin: 10px;
     width: 100px;
+}
+
+.axis path,
+.axis line {
+    visibility: hidden;
+}
+
+.fonts text {
+    font-family: sans-serif;
+    font-size: 10px;
 }

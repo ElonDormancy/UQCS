@@ -1,3 +1,7 @@
+//------
+//Nov 6 2021
+//Author Dormancy
+//------
 class SingleGateSets {
     constructor(theta = 0) {
         this.theta = theta;

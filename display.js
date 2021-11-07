@@ -5,7 +5,7 @@ function BarChart(data, {
   marginRight = 0, // the right margin, in pixels
   marginBottom = 30, // the bottom margin, in pixels
   marginLeft = 20, // the left margin, in pixels
-  width = 800, // the outer width of the chart, in pixels
+  width = data.length * 50, // the outer width of the chart, in pixels
   height = 400, // the outer height of the chart, in pixels
   xDomain, // an array of (ordinal) x-values
   xRange = [marginLeft + 10, width - marginRight], // [left, right]
@@ -22,7 +22,6 @@ function BarChart(data, {
   // Compute values.
   const X = d3.map(data, x);
   const Y = d3.map(data, y);
-
   // Compute default domains, and unique the x-domain.
   if (xDomain === undefined) xDomain = X;
   if (yDomain === undefined) yDomain = [0, d3.max(Y)];
@@ -34,17 +33,18 @@ function BarChart(data, {
   const xScale = d3.scaleBand(xDomain, xRange).padding(xPadding);
   const yScale = yType(yDomain, yRange);
   const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
-  const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);//Change the Scale
+  var yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);//Change the Scale
   const format = yScale.tickFormat(100, yFormat);
   const svg = d3.select("#display")
     .append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", [0, 0, width, height])
-    .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+    .attr("style", " height: auto; height: intrinsic;");
 
   const yGroup = svg.append("g")
-    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("transform", `translate(${marginLeft},-2)`)
+    .attr("class", "axis fonts")
     .call(yAxis)
     .call(g => g.select(".domain").remove())
     .call(g => g.selectAll(".tick").call(grid))
@@ -68,7 +68,11 @@ function BarChart(data, {
 
   const xGroup = svg.append("g")
     .attr("transform", `translate(0,${height - marginBottom})`)
-    .call(xAxis);
+    .attr("class", "fonts")
+    .call(xAxis)
+    .selectAll("text")
+    .attr("transform", `translate(-10,10)rotate(-45)`)
+
 
   // A helper method for updating the position of bars.
   function position(rect, x, y) {
