@@ -13,7 +13,7 @@ var qvizdraw = {
     qubits: [],
     operations: [],
 };
-
+const compilenav = document.querySelector("#Compile > a")
 //Initialize the navigation bar
 const getrows = document.getElementById("rowsinput")
 const getcols = document.getElementById("colsinput")
@@ -25,6 +25,7 @@ document.querySelector("#addrow").disabled = true;
 document.querySelector("#addcol").disabled = true;
 document.querySelector("#deleterow").disabled = true;
 document.querySelector("#deletecol").disabled = true;
+compilenav.disabled = true;
 
 getrows.onfocus = function () {
     if (this.value == "Rows") {
@@ -249,7 +250,7 @@ function qubitreverse(qubits) {
 function qreverse() {
     var row = this.parentNode.getAttribute("data-rows")
     var temp = document.querySelectorAll("#qvizdraw> svg >text ")
-    var qubit= temp[row]
+    var qubit = temp[row]
     if (this.getAttribute("data-index") == 0) {
         this.setAttribute("src", "./images/ket1.svg")
         this.setAttribute("data-index", 1)

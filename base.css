@@ -18,6 +18,8 @@
 
 #display {
     margin-left: 10px;
+    border: 2px black solid;
+    width: 840px;
 }
 
 .nav:hover {
@@ -90,6 +92,11 @@ a {
     display: inline-block;
     margin: 2px;
 
+}
+
+.gatesets {
+    width: 496px;
+    border: 2px black solid;
 }
 
 .ctrlline {
