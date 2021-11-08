@@ -14,6 +14,7 @@ var qvizdraw = {
     operations: [],
 };
 //Initialize the navigation bar
+const thenumberofqubit = 6
 const getrows = document.getElementById("rowsinput")
 const getcols = document.getElementById("colsinput")
 const gatesets = document.querySelectorAll(".gatesets")
@@ -301,13 +302,13 @@ function dragStart() {
     this.className += ' dragging';
     var temp = this.parentNode;
     var tmp = temp.parentNode;
-    if ((this.id == "ctrl" || this.id == "CtrlX") && tmp.className == "ctrlgate") {
+    if ((this.id == "ctrl" || this.getAttribute("data-c") == "controlgate") && tmp.className == "ctrlgate") {
         var nos = document.querySelectorAll(".ctrlline")
         for (var no of nos) {
             no.className = "noplacement"
         }
     }
-    if (this.id == "ctrl" || this.id == "CtrlX") {
+    if (this.id == "ctrl" || this.getAttribute("data-c") == "controlgate") {
         var nos = document.querySelectorAll(".ctrlline")
         for (var no of nos) {
             AddL(no)
@@ -356,7 +357,7 @@ function dragLeave(e) {
 }
 function compile() {
     var len = document.getElementsByClassName("cols").length
-    if (len > 6) {
+    if (len > thenumberofqubit) {
         var draw = document.getElementById("display")
         draw.innerHTML = ""
     }
@@ -380,7 +381,7 @@ function compile() {
 
 function UpdateData() {
     var len = document.getElementsByClassName("cols").length
-    if (len > 6) {
+    if (len > thenumberofqubit) {
         return ""
     }
     else {
@@ -413,7 +414,7 @@ function dragDrop(e) {
         var check2 = c0 == 0 && c1 == 1
         if (check1 || check2) {
             cgs[0].innerHTML = '<div class="draggable" draggable="true" id="ctrl" data-control="true"></div>'
-            cgs[1].innerHTML = '<div class="draggable" draggable="true" id="CtrlX" data-control="true"></div>'
+            cgs[1].innerHTML = '<div class="draggable" draggable="true" data-c="controlgate" id="CtrlX" data-control="true"></div>'
         }
     }
     else {
@@ -452,7 +453,7 @@ function GetCoordinates(draggables) {
         var dragging = draggables[i]
         var gate = dragging.getAttribute("id")
         if (gate.length > 4) {
-            gate = gate[gate.length - 1]
+            gate = gate.slice(4)
         }
         var pcol = dragging.parentNode;
         var prow = pcol.parentNode;

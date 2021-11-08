@@ -2,10 +2,12 @@
 //Nov 6 2021
 //Author Dormancy
 //------
+const pi = math.pi
 class SingleGateSets {
     constructor(theta = 0) {
         this.theta = theta;
     }
+
     X() {
         var i = math.complex(1, 0)
         var ret = math.matrix([[0, i], [i, 0]])
@@ -25,6 +27,20 @@ class SingleGateSets {
         var i = math.complex(1, 0)
         var m = math.multiply(i, math.pow(0.5, 0.5))
         var ret = math.matrix([[m, m], [m, -1 * m]])
+        return ret
+    }
+    S() {
+        var i = math.complex(1, 0)
+        var j = math.complex(0, 1)
+        var temp = math.exp(math.multiply(j, pi / 2))
+        var ret = math.matrix([[i, 0], [0, temp]])
+        return ret
+    }
+    T() {
+        var i = math.complex(1, 0)
+        var j = math.complex(0, 1)
+        var temp = math.exp(math.multiply(j, pi / 4))
+        var ret = math.matrix([[i, 0], [0, temp]])
         return ret
     }
     R(theta) {

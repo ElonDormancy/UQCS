@@ -60,12 +60,7 @@
         <button class="delete" id="deleterow" onclick="deleterow()">DeleteRow</button>
         <button class="delete" id="deletecol" onclick="deletecol()">DeleteCol</button>
     </div>
-    <div id="dragplot">
-        <h2>Circuits rendered by qviz:</h2>
-        <div id="qvizarea">
-            <div id='qvizdraw'></div>
-        </div>
-<div class="gatesets">
+    <div class="gatesets">
         <div class="singlegate">
             <div class="gatesec">Singale Gate</div>
             <div class="gate X">
@@ -80,6 +75,12 @@
             <div class="gate H">
                 <div class="draggable" draggable="true" id="H" data-control="false"></div>
             </div>
+            <div class="gate S">
+                <div class="draggable" draggable="true" id="S" data-control="false"></div>
+            </div>
+            <div class="gate T">
+                <div class="draggable" draggable="true" id="T" data-control="false"></div>
+            </div>
         </div>
         <div class="controlgate">
             <div class="gatesec">Control Gate</div>
@@ -88,7 +89,7 @@
                     <div class="draggable" draggable="true" id="ctrl" data-control="true"></div>
                 </div>
                 <div class="gate X">
-                    <div class="draggable" draggable="true" id="CtrlX" data-control="true"></div>
+                    <div class="draggable" draggable="true" data-c="controlgate" id="CtrlX" data-control="true"></div>
                 </div>
             </div>
         </div>
@@ -97,11 +98,15 @@
             <div class="draggable" draggable="true" data-index="Y"></div>
         </div> -->
     </div>
+    <div id="dragplot">
         <div id="DrawArea">
             <div class="rows">
                 <div class="cols">
                 </div>
             </div>
+        </div>
+        <div id="qvizarea">
+            <div id='qvizdraw'></div>
         </div>
     </div>
     <h2>Result[Histogram]:</h2>

@@ -110,9 +110,7 @@ p {
 
 }
 
-h2 {
-    margin-left: 2px;
-}
+
 
 .ctrlline {
     background-image: url('./images/ctrlline.svg');
@@ -124,6 +122,7 @@ h2 {
 
 .cols {
     white-space: nowrap;
+    height: 60px;
 }
 
 .qubit {
@@ -161,6 +160,14 @@ h2 {
     background-image: url('./images/H.svg');
 }
 
+#T {
+    background-image: url('./images/T.svg');
+}
+
+#S {
+    background-image: url('./images/S.svg');
+}
+
 #ctrl {
     background-image: url('./images/Ctrl.svg');
 }
@@ -169,16 +176,25 @@ h2 {
     background-image: url('./images/CtrlX.svg');
 }
 
-#d3js {
-    background-image: url('./images/d3logo.svg');
+#CtrlRx {
+    background-image: url('./images/Rx.svg');
 }
 
 
 
+#Rtheta {
+    margin: 5px;
+    width: 50px;
+
+}
+
+div.controlgate>div.gatesec>span {
+    margin-left: 20px;
+}
 
 .gatesec {
     font-size: 18px;
-    margin: 2px;
+    margin: 5px;
 }
 
 
@@ -205,4 +221,15 @@ button {
 .fonts text {
     font-family: sans-serif;
     font-size: 10px;
+}
+
+
+#DrawArea {
+    float: left;
+}
+
+
+#qvizarea {
+    margin-top: -12px;
+    display: inline-block;
 }
