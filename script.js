@@ -15,6 +15,7 @@ var qvizdraw = {
 };
 //Initialize the navigation bar
 const thenumberofqubit = 6
+const gettheta = document.getElementById("Rtheta")
 const getrows = document.getElementById("rowsinput")
 const getcols = document.getElementById("colsinput")
 const gatesets = document.querySelectorAll(".gatesets")
@@ -25,6 +26,22 @@ document.querySelector("#addrow").disabled = true;
 document.querySelector("#addcol").disabled = true;
 document.querySelector("#deleterow").disabled = true;
 document.querySelector("#deletecol").disabled = true;
+
+gettheta.onfocus = function () {
+    if (this.value == "N") {
+        this.value = ""
+    }
+
+};
+gettheta.onblur = function () {
+    if (this.value == "" || Number(this.value) > 1024 || Number(this.value) < 0) {
+        this.value = "N"
+    }
+    var n = Number(gettheta.value)
+    if (!isNaN(n) && n > 0) {
+        RthetaGate(n)
+    }
+}
 
 getrows.onfocus = function () {
     if (this.value == "Rows") {
@@ -174,7 +191,7 @@ function addrow() {
     }, 0);
 }
 
-function FindCtrlX(x, draggables) {
+function FindCtrl(x, draggables) {
     for (var i = 0; i < draggables.length; i++) {
         var dragging = draggables[i];
         var pcol = dragging.parentNode;
@@ -195,7 +212,8 @@ function CountArray(arr, num) {
 
 function DeleteSingleCtrl() {
     var tmp = []
-    var draggables = document.querySelectorAll(".draggable")
+    var area = document.querySelector("#DrawArea")
+    var draggables = area.querySelectorAll(".draggable")
     for (var i = 0; i < draggables.length; i++) {
         var dragging = draggables[i];
         if (dragging.getAttribute("data-control") == "true") {
@@ -206,7 +224,7 @@ function DeleteSingleCtrl() {
     }
     for (var i of tmp) {
         if (CountArray(tmp, i) < 2)
-            FindCtrlX(x, draggables)
+            FindCtrl(x, draggables)
     }
 
 }
@@ -357,7 +375,7 @@ function dragLeave(e) {
 }
 function compile() {
     var len = document.getElementsByClassName("cols").length
-    if (len > thenumberofqubit) {
+    if (len > 16) {
         var draw = document.getElementById("display")
         draw.innerHTML = ""
     }
@@ -376,6 +394,11 @@ function compile() {
             height: 400,
             color: "#69b3a2"
         })
+        var drawmap = document.getElementById("Heatmap")
+        drawmap.innerHTML = ""
+        if (len < 6) {
+            Generate(DensityMatrix(ret))
+        }
     }
 }
 
@@ -388,6 +411,11 @@ function UpdateData() {
         var vec = init_vec(GetInitQubits())
         var ret = applygate(vec, GetApplyList())
         var alphabet = GetFrequency(ret)
+        var drawmap = document.getElementById("Heatmap")
+        drawmap.innerHTML = ""
+        if (len < 6) {
+            Generate(DensityMatrix(ret))
+        }
         update = chart.update(alphabet, {
             x: d => d.qubit,
             y: d => d.frequency,
@@ -408,13 +436,14 @@ function dragDrop(e) {
     dragitem.className = "draggable"
     if (wcgate == "true") {
         var cgs = document.querySelector("#cnot").querySelectorAll(".gate")
-        var c0 = cgs[0].childElementCount
-        var c1 = cgs[1].childElementCount
-        var check1 = c0 == 1 && c1 == 0
-        var check2 = c0 == 0 && c1 == 1
-        if (check1 || check2) {
+        var crx = document.querySelector("#crx").querySelectorAll(".gate")
+        if (CheckContrlGate(cgs)) {
             cgs[0].innerHTML = '<div class="draggable" draggable="true" id="ctrl" data-control="true"></div>'
             cgs[1].innerHTML = '<div class="draggable" draggable="true" data-c="controlgate" id="CtrlX" data-control="true"></div>'
+        }
+        if (CheckContrlGate(crx)) {
+            crx[0].innerHTML = '<div class="draggable" draggable="false" id="ctrl" data-control="true"></div>'
+            crx[1].innerHTML = '<div class="draggable" draggable="false" data-c="controlgate" id="CtrlRx" data-control="true">'
         }
     }
     else {
@@ -431,7 +460,13 @@ function dragDrop(e) {
 
 }
 
-
+function CheckContrlGate(cgs) {
+    var c0 = cgs[0].childElementCount
+    var c1 = cgs[1].childElementCount
+    var check1 = c0 == 1 && c1 == 0
+    var check2 = c0 == 0 && c1 == 1
+    return check1 || check2
+}
 
 // ----------------Draw The Quantum Circuit with Qviz--------------
 // ----------------------------------------------------------------
@@ -626,8 +661,20 @@ function placement(indexxs) {
 }
 
 
+function GenerateRxBackground(n) {
+    var ret = `<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg"><g><rect id="svg_1" height="50" width="50" y="0" x="0" stroke-width="3" stroke="#000" fill="#ccccd6"/><text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_3" y="32.997583" x="10.33415" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">R</text><text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_3" y="32.997583" x="28" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">${n}</text></g></svg>`
+    return ret
+}
 
 
+function RthetaGate(n) {
+    var rxgate = document.querySelector("#crx > div.gate.rx > div");
+    var encoded = window.btoa(GenerateRxBackground(n));
+    document.querySelector("#crx > div.gate.ctrl > div").setAttribute("draggable", "true");
+    rxgate.setAttribute("draggable", "true");
+    rxgate.style.background = "url(data:image/svg+xml;base64," + encoded + ")";
+    rxgate.id = `CtrlR${n}`
+}
 
 
 // ----------------------------------------------------------------

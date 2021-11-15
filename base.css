@@ -180,7 +180,9 @@ p {
     background-image: url('./images/Rx.svg');
 }
 
-
+#dragplot {
+    margin-top: 10px;
+}
 
 #Rtheta {
     margin: 5px;
@@ -232,4 +234,9 @@ button {
 #qvizarea {
     margin-top: -12px;
     display: inline-block;
+}
+
+#heatmap {
+    top: 100px;
+    position: relative;
 }

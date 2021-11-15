@@ -21,6 +21,41 @@ function GetApplyList() {
     return applylist
 }
 
+
+function DensityMatrix(ret) {
+    var len = ret.length
+    var M = []
+    for (var i = 0; i < len; i++) {
+        var rows = []
+        for (var j = 0; j < len; j++) {
+            rows[j] = ret[i] * ret[j]
+        }
+        M[i] = rows
+    }
+    return M
+}
+
+function DicDensityMatrix(ret) {
+    var len = ret.length
+    var RM = []
+    var n = getBaseLog(2, len)
+    for (var i = 0; i < len; i++) {
+        for (var j = 0; j < len; j++) {
+            var object = {
+                qubit_row: "",
+                qubit_col: "",
+                values: ""
+            }
+            object["qubit_row"] = i2b(i, n)
+            object["qubit_col"] = i2b(j, n)
+            object["values"] = ret[i] * ret[j]
+            RM.push(object)
+        }
+    }
+    return RM
+}
+
+
 function GetFrequency(ret) {
     var normalized = []
     var len = ret.length

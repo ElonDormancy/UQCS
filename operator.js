@@ -4,8 +4,8 @@
 //------
 const pi = math.pi
 class SingleGateSets {
-    constructor(theta = 0) {
-        this.theta = theta;
+    constructor(n) {
+        this.n = n;
     }
 
     X() {
@@ -43,17 +43,24 @@ class SingleGateSets {
         var ret = math.matrix([[i, 0], [0, temp]])
         return ret
     }
-    R(theta) {
+    R(n) {
         var i = math.complex(1, 0)
         var j = math.complex(0, 1)
-        var ret = math.matrix([[i, 0], [0, math.multiply(j, this.theta)]])
+        var tmp = pi / math.pow(2, n)
+        var u = math.exp(math.multiply(j, tmp))
+        var ret = math.matrix([[i, 0], [0, u]])
         return ret
     }
 }
 
 function SelectGate(Gate) {
     var GateSets = new SingleGateSets()
-    var str = "GateSets." + Gate + "()"
+    if (Gate.length > 1) {
+        var str = "GateSets." + Gate[0] + `(${Gate[1]})`
+    }
+    else {
+        var str = "GateSets." + Gate + "(0)"
+    }
     var ret = eval(str)
     return ret
 }
