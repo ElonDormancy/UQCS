@@ -46,7 +46,7 @@ class SingleGateSets {
     R(n) {
         var i = math.complex(1, 0)
         var j = math.complex(0, 1)
-        var tmp = pi / math.pow(2, n)
+        var tmp = 2 * pi / math.pow(2, n)
         var u = math.exp(math.multiply(j, tmp))
         var ret = math.matrix([[i, 0], [0, u]])
         return ret

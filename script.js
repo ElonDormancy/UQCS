@@ -13,8 +13,29 @@ var qvizdraw = {
     qubits: [],
     operations: [],
 };
+function Init_algorithm() {
+    var options = document.getElementById('example').children;
+    options[0].selected = true
+}
+function chart_matrix_options(ret) {
+    var n = ret.length
+    var m = getBaseLog(2, n)
+    var chart_options = {
+        container: "#Matrix",
+        start_color: '#ffffff',
+        end_color: '#d42517',
+        width: n * 50,
+        height: n * 50,
+        margin: { top: 20, right: 10, bottom: 20 * m, left: 15 * m },
+        highlight_cell_on_hover: true,
+        highlight_cell_color: '#69b3a2',
+        labelmarginleft: -m * 16 / 2,
+    };
+    return chart_options
+}
 //Initialize the navigation bar
 const thenumberofqubit = 6
+const circuit_example = document.getElementById("example")
 const gettheta = document.getElementById("Rtheta")
 const getrows = document.getElementById("rowsinput")
 const getcols = document.getElementById("colsinput")
@@ -26,7 +47,7 @@ document.querySelector("#addrow").disabled = true;
 document.querySelector("#addcol").disabled = true;
 document.querySelector("#deleterow").disabled = true;
 document.querySelector("#deletecol").disabled = true;
-
+circuit_example.disabled = true;
 gettheta.onfocus = function () {
     if (this.value == "N") {
         this.value = ""
@@ -84,7 +105,7 @@ btn.onclick = function () {
     var rows = getrows.value
     var cols = getcols.value
     if (rows != "Rows" && cols != "Cols") {
-        Initialize(rows, cols)
+        restart()
         var addrow = document.querySelector("#addrow")
         var addcol = document.querySelector("#addcol")
         var deleterow = document.querySelector("#deleterow")
@@ -95,6 +116,10 @@ btn.onclick = function () {
         deletecol.disabled = false
         getcols.disabled = false
         getrows.disabled = false
+        circuit_example.disabled = false;
+        setTimeout(() => {
+            Initialize(rows, cols)
+        }, 0);
     }
 }
 
@@ -105,34 +130,33 @@ function restart() {
     setTimeout(() => {
         var rows = document.querySelector(".rows")
         rows.innerHTML = '<div class="cols"></div>'
+        Init_algorithm()
     }, 0);
 }
 
 function Initialize(rows, cols) {
-    restart()
     qvizdraw = { qubits: [], operations: [] }
+
+    var arr1 = [];
+    arr1.push()
+    for (var i = 0; i < cols; i++) {
+        arr1.push(`<div class="droppable row" data-cols = "${i}"></div>`);
+    }
+    document.querySelector('.cols').innerHTML = arr1.join('');
+    var arr2 = [];
+    var temp = document.querySelector(".cols").innerHTML
+    for (var i = 0; i < rows; i++) {
+        arr2.push(`<div class="cols" data-rows = "${i}">` + `<img data-index="0" data-qindex="${i}" class="qubit" src="./images/ket0.svg" alt="\ket{0}" height="50px" width="50px" />` + temp.toString() + '</div>');
+        qvizdraw["qubits"].push({ id: i })
+    }
+    document.querySelector('.rows').innerHTML = arr2.join('');
     setTimeout(() => {
-        var arr1 = [];
-        arr1.push()
-        for (var i = 0; i < cols; i++) {
-            arr1.push(`<div class="droppable row" data-cols = "${i}"></div>`);
-        }
-        document.querySelector('.cols').innerHTML = arr1.join('');
-        var arr2 = [];
-        var temp = document.querySelector(".cols").innerHTML
-        for (var i = 0; i < rows; i++) {
-            arr2.push(`<div class="cols" data-rows = "${i}">` + `<img data-index="0" data-qindex="${i}" class="qubit" src="./images/ket0.svg" alt="\ket{0}" height="50px" width="50px" />` + temp.toString() + '</div>');
-            qvizdraw["qubits"].push({ id: i })
-        }
-        document.querySelector('.rows').innerHTML = arr2.join('');
-        setTimeout(() => {
-            droppablesvar = document.querySelectorAll('.droppable')//CHANGE THE GLOBAL VARS
-            qubits = document.querySelectorAll(".qubit")//CHANGE THE GLOBAL VARS
-            droplisten(droppablesvar)
-            qubitreverse(qubits)
-            totoaldrawqc(totoalqcinfor())
-            compile()
-        }, 0);
+        droppablesvar = document.querySelectorAll('.droppable')//CHANGE THE GLOBAL VARS
+        qubits = document.querySelectorAll(".qubit")//CHANGE THE GLOBAL VARS
+        droplisten(droppablesvar)
+        qubitreverse(qubits)
+        totoaldrawqc(totoalqcinfor())
+        compile()
     }, 0);
 }
 
@@ -149,6 +173,7 @@ function addcol() {
         temp[i].appendChild(o)
     }
     setTimeout(() => {
+        Init_algorithm()
         droppablesvar = document.querySelectorAll('.droppable')//CHANGE THE GLOBAL VARS
         droplisten(droppablesvar)
         totoaldrawqc(totoalqcinfor())
@@ -182,6 +207,7 @@ function addrow() {
     var index = qubits[qubits.length - 1]["id"]
     qvizdraw["qubits"].push({ id: index + 1 })
     setTimeout(() => {
+        Init_algorithm()
         droppablesvar = document.querySelectorAll('.droppable')//CHANGE THE GLOBAL VARS
         qubits = document.querySelectorAll(".qubit")//CHANGE THE GLOBAL VARS
         droplisten(droppablesvar)
@@ -240,6 +266,7 @@ function deleterow() {
     qubits.pop()
     qvizdraw["qubits"] = qubits//CHANGE THE GLOBAL VARS
     setTimeout(() => {
+        Init_algorithm()
         DeleteSingleCtrl()
         totoaldrawqc(totoalqcinfor())
         compile()
@@ -258,6 +285,7 @@ function deletecol() {
         temp[len - 1].remove()
     }
     setTimeout(() => {
+        Init_algorithm()
         totoaldrawqc(totoalqcinfor())
         compile()
     }, 0);
@@ -307,8 +335,8 @@ function RemoveL(tmp) {
 // --------------------------Dragging Function-------------------
 // --------------------------------------------------------------
 //Add Listener of all drag
-draggingall(draggablesvar)//Initize the function
-function draggingall(temp) {
+draggableL(draggablesvar)//Initize the function
+function draggableL(temp) {
     for (var draggable of temp) {
         draggable.addEventListener('dragstart', dragStart);
         draggable.addEventListener('dragend', dragEnd);
@@ -344,9 +372,9 @@ function dragEnd() {
         for (var no of nos) {
             RemoveL(no)
         }
-
+        Init_algorithm()
         draggablesvar = document.querySelectorAll(".draggable")
-        draggingall(draggablesvar)
+        draggableL(draggablesvar)
         totoaldrawqc(totoalqcinfor())
     }, 0);
 }
@@ -394,13 +422,14 @@ function compile() {
             height: 400,
             color: "#69b3a2"
         })
-        var drawmap = document.getElementById("Heatmap")
-        drawmap.innerHTML = ""
-        if (len < 6) {
-            Generate(DensityMatrix(ret))
+        var drawm = document.getElementById("Matrix")
+        drawm.innerHTML = ""
+        if (len < 7) {
+            Matrix(DensityMatrix(ret), chart_matrix_options(ret))
         }
     }
 }
+
 
 function UpdateData() {
     var len = document.getElementsByClassName("cols").length
@@ -411,11 +440,6 @@ function UpdateData() {
         var vec = init_vec(GetInitQubits())
         var ret = applygate(vec, GetApplyList())
         var alphabet = GetFrequency(ret)
-        var drawmap = document.getElementById("Heatmap")
-        drawmap.innerHTML = ""
-        if (len < 6) {
-            Generate(DensityMatrix(ret))
-        }
         update = chart.update(alphabet, {
             x: d => d.qubit,
             y: d => d.frequency,
@@ -424,6 +448,11 @@ function UpdateData() {
             height: 400,
             color: "#69b3a2"
         })
+        var drawm = document.getElementById("Matrix")
+        drawm.innerHTML = ""
+        if (len < 7) {
+            Matrix(DensityMatrix(ret), chart_matrix_options(ret));
+        }
     }
 }
 
@@ -453,9 +482,11 @@ function dragDrop(e) {
     this.innerHTML = (stringIze(dragitem))
     setTimeout(() => {
         draggablesvar = document.querySelectorAll(".draggable")
-        draggingall(draggablesvar)
+        draggableL(draggablesvar)
         totoaldrawqc(totoalqcinfor())
         UpdateData()
+        var selectbox = document.querySelector("#example")
+        selectbox.options[0].selected = true;
     }, 0);
 
 }
@@ -511,6 +542,7 @@ function totoaldrawqc(qcinfor) {
     var inforcontainer = []
     qvizdraw["operations"] = []
     var cols = document.querySelector(".cols").childElementCount
+
     for (var i = 0; i < cols - 1; i++) {
         var container = {
             index: 0,
@@ -674,6 +706,19 @@ function RthetaGate(n) {
     rxgate.setAttribute("draggable", "true");
     rxgate.style.background = "url(data:image/svg+xml;base64," + encoded + ")";
     rxgate.id = `CtrlR${n}`
+}
+
+
+function UpdateRGate() {
+    var CRS = document.querySelectorAll(".draggable")
+    for (var CR of CRS) {
+        var gateclass = CR.id.slice(0, 5)
+        if (gateclass == "CtrlR" && CR.id != "CtrlRx") {
+            var n = parseInt(CR.id.slice(5))
+            var encoded = window.btoa(GenerateRxBackground(n));
+            CR.style.background = "url(data:image/svg+xml;base64," + encoded + ")";
+        }
+    }
 }
 
 

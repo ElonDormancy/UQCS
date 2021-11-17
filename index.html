@@ -15,46 +15,57 @@
         <!-- <div class="Navbar" id="Meau">
             <a href="#" class="nav" onclick="set()">Meau</a>
         </div> -->
-        <div class="Navbar" id="Compile">
-            <a href="#" class="nav" onclick="compile()">Compile</a>
+        <div class="Navbar">
+            <a href="#" class="nav" onclick=compile() id="Compile">Compile</a>
         </div>
-        <div class="Navbar" id="About">
-            <a href="https://github.com/ElonDormancy/QuantumSimulator" class="nav">About</a>
+        <div class="Navbar">
+            <a href="#" class="nav" id="About">About</a>
         </div>
-        <a href="https://catonmat.net/ftp/simulating-physics-with-computers-richard-feynman.pdf">Simulating Physics
-            with Computers -
-            Richard P. Feynman </a>
+
     </div>
     </div>
-    <div class="content">
-        <div id="write" class=" first-line-indent">
-            <h1 id="introduction"><span>Introduction</span></h1>
-            <p><span>The Page is able to drag and drop to plot the quantum circuit and calculate the state evolution
-                    with the gate operator.</span></p>
-            <p><span>The circuit you drag to plot will display below the area where you drag.</span></p>
-            <p><span>The final state after applying the operators will display below the area where the plot
-                    shows.</span></p>
-            <p><span>If you want to calculate the more qubits like more than 30,Recommand you to click
-                </span>[<a href="https://github.com/ElonDormancy/QuantumSimulator">here</a>]to get the parallel
-                version[C++].</span></p>
-            <p><span>Welcome to Fork and Star !</span></p>
-            <h2 id="manual"><span>Manual</span></h2>
-            <p><span>1.Input the </span><strong><span>rows</span></strong><span> and
-                </span><strong><span>cols</span></strong><span> where decide the size of your circuit</span></p>
-            <p><span>2.Drag and Drop the gate or control gate into the canvnas[Gate continuously loading and
-                    wait]</span></p>
-            <h2 id="attention"><span>Attention</span></h2>
-            <p><span>1.You can't replace a single part of the control gate.</span></p>
-            <p><span>2.Because of the limitation of the Javascript single thread the program provide the operator
-                    evolution below the number of qubit less than 6.[If want to get the result with the number of qubits
-                    more than 6;Click the compile to get]</span></p>
-            <p><span>3.You must input the n of Rx to generate the Control Rx Gate and drag to plot.</span></p>
+    <div id="content">
+        <div id="write" class=" first-line-indent" style="text-align: left">
+            <h1 id="title" style="text-align: center"><span>Quantum Simulator</span></h1>
+            <a style="text-align: center"
+                href="https://catonmat.net/ftp/simulating-physics-with-computers-richard-feynman.pdf">Simulating Physics
+                with Computers -
+                Richard P. Feynman </a>
+            <h2 id="introduction"><span>Introduction</span></h1>
+                <p><span>The Page is able to drag and drop to plot the quantum circuit and calculate the state evolution
+                        with the gate operator.</span></p>
+                <p><span>The circuit you drag to plot will display below the area where you drag.</span></p>
+                <p><span>The final state after applying the operators will display below the area where the plot
+                        shows.</span></p>
+                <p><span>If you want to calculate the more qubits like more than 30,Recommand you to click
+                    </span>[<a href="https://github.com/ElonDormancy/QuantumSimulator">here</a>]to get the parallel
+                    version[C++].</span></p>
+                <p><span>Welcome to Fork and Star !</span></p>
+                <h2 id="manual"><span>Manual</span></h2>
+                <p><span>1.Input the </span><strong><span>rows</span></strong><span> and
+                    </span><strong><span>cols</span></strong><span> where decide the size of your circuit</span></p>
+                <p><span>2.Drag and Drop the gate or control gate into the canvnas[Gate continuously loading and
+                        wait]</span></p>
+                <h2 id="attention"><span>Attention</span></h2>
+                <p><span>1.You can't replace a single part of the control gate.</span></p>
+                <p><span>2.Because of the limitation of the Javascript single thread the program provide the operator
+                        evolution below the number of qubit less than 6.[If want to get the result with the number of
+                        qubits
+                        more than 6;Click the compile to get]</span></p>
+                <p><span>3.You must input the n of Rx to generate the Control Rx Gate and drag to plot.</span></p>
         </div>
     </div>
     <div class="init">
         <input type="text" min="0" class="input" value="Rows" id="rowsinput" />
         <input type="text" min="0" class="input" value="Cols" id="colsinput" />
         <button id="btn">Start/Restart</button>
+        <select name="example" onchange="Execution_algorithm(this)" id="example">
+            <option>algorithm</option>
+            <option value="Superposition">Superposition</option>
+            <option value="QFT">QFT</option>
+            <option value="Bell">Bell State</option>
+            <option value="GHZ">GHZ State</option>
+        </select>
     </div>
     <div class="init">
         <button class="add" id="addrow" onclick="addrow()">AddRow</button>
@@ -118,7 +129,7 @@
         </div>
     </div>
     <h2>Result[DensityMatrix]:</h2>
-    <div id="Heatmap"></div>
+    <div id="Matrix"></div>
     <h2>Result[Histogram]:</h2>
     <div id="display"></div>
 
@@ -134,15 +145,15 @@
         dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
     });
 </script>
-<script src="./libs/d3-3d.js"></script>
 <script src="./libs/d3.min.js"></script>
 <script src="./libs/math.js"></script>
 <script src="./operator.js"></script>
 <script src="./init_data.js"></script>
+<script src="./DensityMatrix.js"></script>
 <script src="./HistogramDisplay.js"></script>
-<script src="./Heatmap.js"></script>
 <script src="./script.js"></script>
-
+<script src="./example.js"></script>
+<script src="./navbar.js"></script>
 
 
 
