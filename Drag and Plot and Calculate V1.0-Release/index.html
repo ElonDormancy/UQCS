@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <link rel="stylesheet" type="text/css" href="base.css" />
+    <script src="./libs/quantum-viz.js"></script>
+</head>
+
+<body>
+    <div class="Navbars">
+        <!-- <div class="Navbar" id="Meau">
+            <a href="#" class="nav" onclick="set()">Meau</a>
+        </div> -->
+        <div class="Navbar">
+            <a href="#" class="nav" onclick=compile() id="Compile">Compile</a>
+        </div>
+        <div class="Navbar">
+            <a href="#" class="nav" id="About">About</a>
+        </div>
+
+    </div>
+    </div>
+    <div id="content">
+        <div id="write" class=" first-line-indent" style="text-align: left">
+            <h1 id="title" style="text-align: center"><span>Quantum Simulator</span></h1>
+            <a style="text-align: center"
+                href="https://catonmat.net/ftp/simulating-physics-with-computers-richard-feynman.pdf">Simulating Physics
+                with Computers -
+                Richard P. Feynman </a>
+            <h2 id="introduction"><span>Introduction</span></h1>
+                <p><span>The Page is able to drag and drop to plot the quantum circuit and calculate the state evolution
+                        with the gate operator.</span></p>
+                <p><span>The circuit you drag to plot will display below the area where you drag.</span></p>
+                <p><span>The final state after applying the operators will display below the area where the plot
+                        shows.</span></p>
+                <p><span>If you want to calculate the more qubits like more than 30,Recommand you to click
+                    </span>[<a href="https://github.com/ElonDormancy/QuantumSimulator">here</a>]to get the parallel
+                    version[C++].</span></p>
+                <p><span>Welcome to Fork and Star !</span></p>
+                <h2 id="manual"><span>Manual</span></h2>
+                <p><span>1.Input the </span><strong><span>rows</span></strong><span> and
+                    </span><strong><span>cols</span></strong><span> where decide the size of your circuit</span></p>
+                <p><span>2.Drag and Drop the gate or control gate into the canvnas[Gate continuously loading and
+                        wait]</span></p>
+                <h2 id="attention"><span>Attention</span></h2>
+                <p><span>1.You can't replace a single part of the control gate.</span></p>
+                <p><span>2.Because of the limitation of the Javascript single thread the program provide the operator
+                        evolution below the number of qubit less than 6.[If want to get the result with the number of
+                        qubits
+                        more than 6;Click the compile to get]</span></p>
+                <p><span>3.You must input the n of Rx to generate the Control Rx Gate and drag to plot.</span></p>
+        </div>
+    </div>
+    <div class="init">
+        <input type="text" min="0" class="input" value="Rows" id="rowsinput" />
+        <input type="text" min="0" class="input" value="Cols" id="colsinput" />
+        <button id="btn">Start/Restart</button>
+        <select name="example" onchange="Execution_algorithm(this)" id="example">
+            <option>algorithm</option>
+            <option value="Superposition">Superposition</option>
+            <option value="QFT">QFT</option>
+            <option value="Bell">Bell State</option>
+            <option value="GHZ">GHZ State</option>
+        </select>
+    </div>
+    <div class="init">
+        <button class="add" id="addrow" onclick="addrow()">AddRow</button>
+        <button class="add" id="addcol" onclick="addcol()">AddCol</button>
+        <button class="delete" id="deleterow" onclick="deleterow()">DeleteRow</button>
+        <button class="delete" id="deletecol" onclick="deletecol()">DeleteCol</button>
+    </div>
+    <div class="gatesets">
+        <div class="singlegate">
+            <div class="gatesec">Singale Gate</div>
+            <div class="gate X">
+                <div class="draggable" draggable="true" id="X" data-control="false"></div>
+            </div>
+            <div class="gate Y">
+                <div class="draggable" draggable="true" id="Y" data-control="false"></div>
+            </div>
+            <div class="gate Z">
+                <div class="draggable" draggable="true" id="Z" data-control="false"></div>
+            </div>
+            <div class="gate H">
+                <div class="draggable" draggable="true" id="H" data-control="false"></div>
+            </div>
+            <div class="gate S">
+                <div class="draggable" draggable="true" id="S" data-control="false"></div>
+            </div>
+            <div class="gate T">
+                <div class="draggable" draggable="true" id="T" data-control="false"></div>
+            </div>
+        </div>
+        <div class="controlgate">
+            <div class="gatesec">Control Gate<span>Rn<input type="text" value="N" id="Rtheta"></span></div>
+            <div class="ctrlgate" id="cnot">
+                <div class="gate ctrl">
+                    <div class="draggable" draggable="true" id="ctrl" data-control="true"></div>
+                </div>
+                <div class="gate X">
+                    <div class="draggable" draggable="true" data-c="controlgate" id="CtrlX" data-control="true"></div>
+                </div>
+            </div>
+            <div class="ctrlgate" id="crx">
+                <div class="gate ctrl">
+                    <div class="draggable" draggable="false" id="ctrl" data-control="true"></div>
+                </div>
+                <div class="gate rx">
+                    <div class="draggable" draggable="false" data-c="controlgate" id="CtrlRx" data-control="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="dragplot">
+        <div id="DrawArea">
+            <div class="rows">
+                <div class="cols">
+                </div>
+            </div>
+        </div>
+        <div id="qvizarea">
+            <div id='qvizdraw'></div>
+        </div>
+    </div>
+    <h2>Result[DensityMatrix]:</h2>
+    <div id="Matrix"></div>
+    <h2>Result[Histogram]:</h2>
+    <div id="display"></div>
+
+</body>
+<link rel="stylesheet" href="./libs/default.css">
+<script src="./libs/index.min.js"></script>
+<!--optional import of scroll behaviour-->
+<script src="./libs/scroll-behaviour.min.js"></script>
+<script>
+    // options are optional ;)
+    MobileDragDrop.polyfill({
+        // use this to make use of the scroll behaviour
+        dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+    });
+</script>
+<script src="./libs/d3.min.js"></script>
+<script src="./libs/math.js"></script>
+<script src="./operator.js"></script>
+<script src="./init_data.js"></script>
+<script src="./DensityMatrix.js"></script>
+<script src="./HistogramDisplay.js"></script>
+<script src="./script.js"></script>
+<script src="./example.js"></script>
+<script src="./navbar.js"></script>
+
+
+
+</html>
