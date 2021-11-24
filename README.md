@@ -1,35 +1,55 @@
-[![](https://img.shields.io/badge/Platform-Python-lightgrey)](https://www.python.org/)  [![](https://img.shields.io/badge/Platform-C%2FC%2B%2B-lightgrey)](https://www.cplusplus.com/)
-# QuantumSimulator
-QuantumSimulator with plot
-The Quantum Simulator coded with python but it can be improved by using fortran/C++ and Parallel Computing
-
-## V1.0 Python
-
-Plot engine:https://github.com/rpmuller/PlotQCircuit
-
-Example:https://github.com/ElonDormancy/QuantumSimulator/blob/main/QS/Example.ipynb
-
-## V2.0 C++
-[C++ Single Gate Matrix Version](https://github.com/ElonDormancy/QuantumSimulator/tree/main/QSC%2B%2B)
-
-In order to speed up the for loop, the <omp.h> library is used:
-
-### C++ with OMP
-
-[C++ Version with OMP](https://github.com/ElonDormancy/QuantumSimulator/tree/main/QSC%2B%2BOMP)
+[![](https://img.shields.io/badge/Platform-Python-lightgrey)](https://www.python.org/)  [![](https://img.shields.io/badge/Platform-C%2FC%2B%2B-lightgrey)](https://www.cplusplus.com/)  ![](https://img.shields.io/badge/Platform-Javascript-lightgrey)
 
 
-### C++ with cuBLAS
 
-[C++ Version with cuBLAS](https://github.com/ElonDormancy/QuantumSimulator/tree/main/QSC%2B%2BcuBLAS)
+# Quantum Simulator
 
-The Main idea to accelerate the Speed of QuantumSimulator is to accelerate the for loop,further I will use the MPI lib or CUDA(Or Other Libs) to do it.
+The Quantum Simulator Project with for-loop method to apply the single qubit gate or two-qubit gate on the qubit and the process is able to accelerate with parallel computation,And you are easily constructing the single qubit gate or control gate via input the matrix form of the gate.
 
-The Code'algorithm above is a **mistake**,but it still provide a idea to accelerate the calculation speed of QS.
+Because of the Plot engine:https://github.com/rpmuller/PlotQCircuit The Python version of the quantum simulator is able to plot the quantum circuit as while as the psi evolution.
 
-## Drag-Drop Plot
+The example in [Quantum Simulator Plot Example.ipynb][https://github.com/ElonDormancy/QuantumSimulator/blob/develop/QS/Example.ipynb]
 
-Drag to plot the quantum circuit and render by [qviz](https://github.com/microsoft/quantum-viz.js)
+For example four quantum fourier transform[without SWAP]
 
-Try it by yourself
-https://elondormancy.github.io/QuantumSimulator/
+```
+psi = [0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j
+       0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j]
+```
+
+![QFT 4 qubits py](D:\桌面\Quantum Simlator Introduction\doc\QFT 4 qubits py.png)
+
+And C++ version is able to realize the goal more effective and the Main idea to accelerate the speed of QuantumSimulator is to accelerate the for loop,further I will use the MPI lib or CUDA(Or Other Libs) to do it.
+
+
+
+| Single Gate      | Control Gate      |
+| ---------------- | ----------------- |
+| H[Hadamard Gate] | CNOT              |
+| X[Pauil-X Gate]  | Control R(n) Gate |
+| Y[Pauil-Y Gate]  | /                 |
+| Z[Pauil-Y Gate]  | /                 |
+| S[Pi/4 Gate]     | /                 |
+| T[Pi/8 Gate]     | /                 |
+| R(n)[Phase Gate] | /                 |
+
+
+
+----
+
+## Drag-Drop Quantum Simulator
+
+Because of the most fabulous interactive effect with Javasciprt and Drag and drop to draw quantum circuits instead of coding is a more intuitive way.Fortunately with render of [qviz](https://github.com/microsoft/quantum-viz.js),we are able to drag and drop to plot such beautiful quantum circuit that just move your fingers.[The Drag and drop can also use in your mobile devices]
+
+### Example
+
+<img src="D:\桌面\Quantum Simlator Introduction\doc\QFT 5.gif" alt="QFT 5" style="zoom:200%;" />
+
+### Result
+
+Provide density matrix and histogram form to have a better visualization of the final state.
+
+<img src="D:\桌面\Quantum Simlator Introduction\doc\drag and drop.gif" alt="drag and drop" style="zoom:150%;" />
+
+Try it by yourself https://elondormancy.github.io/QuantumSimulator/!
+
