@@ -17,7 +17,7 @@ psi = [0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j
        0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j 0.25+0.j]
 ```
 
-![QFT 4 qubits py](D:\桌面\Quantum Simlator Introduction\doc\QFT 4 qubits py.png)
+![QFT 4 qubits py](https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/QFT%204%20qubits%20py.png)
 
 And C++ version is able to realize the goal more effective and the Main idea to accelerate the speed of QuantumSimulator is to accelerate the for loop,further I will use the MPI lib or CUDA(Or Other Libs) to do it.
 
@@ -43,13 +43,13 @@ Because of the most fabulous interactive effect with Javasciprt and Drag and dro
 
 ### Example
 
-<img src="D:\桌面\Quantum Simlator Introduction\doc\QFT 5.gif" alt="QFT 5" style="zoom:200%;" />
+<img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/QFT%205.gif" alt="QFT Five Qubit" style="zoom:200%;" />
 
 ### Result
 
 Provide density matrix and histogram form to have a better visualization of the final state.
 
-<img src="D:\桌面\Quantum Simlator Introduction\doc\drag and drop.gif" alt="drag and drop" style="zoom:150%;" />
+<img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/drag%20and%20drop.gif" style="zoom:150%;" />
 
 Try it by yourself https://elondormancy.github.io/QuantumSimulator/!
 
