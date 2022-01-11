@@ -1,0 +1,1 @@
+{"single_gate_sets":[{"cols":"0","rows":"0","gateclass":"H"}],"control_gate_sets":[{"ctrl":{"cols":"1","rows":"0","gateclass":"ctrl"},"ctrlgate":{"cols":"1","rows":"1","gateclass":"X"},"order":"-1"},{"ctrl":{"cols":"2","rows":"1","gateclass":"ctrl"},"ctrlgate":{"cols":"2","rows":"2","gateclass":"X"},"order":"-2"}]}
