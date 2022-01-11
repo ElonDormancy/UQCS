@@ -35,8 +35,7 @@ def Load_Gate_Sets(gate_sets):
         }
         cg_infor["gate_infor"] = cg
         gate_timing.append(cg_infor)
-    sorted(gate_timing, key = lambda i: i['order'])
-    return gate_timing
+    return sorted(gate_timing, key = lambda i: i['order'])
 def Apply_Gate_Sets(init_state,gate_timing):
     q = init_state
     cir= []
