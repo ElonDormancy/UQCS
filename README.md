@@ -27,13 +27,13 @@ Try it out:[易](https://elondormancy.github.io/QuantumSimulator/)
 Drag to plot
 
 <p align="center">
-    <img src="/doc/drag_demo_1.gif" alt="screenshot of save circuit" width="80%"/>
+    <img src="/doc/drag_demo_1.gif" alt="screenshot of save circuit" width="100%"/>
 </p>
 
 Result:
 
 <p align="center">
-    <img src="/doc/drag_demo_2.gif" alt="screenshot of save circuit" width="80%"/>
+    <img src="/doc/drag_demo_2.gif" alt="screenshot of save circuit" width="100%"/>
 </p>
 
 --
