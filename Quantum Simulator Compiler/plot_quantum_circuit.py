@@ -1,7 +1,7 @@
 import matplotlib
 import matplotlib.pyplot
 import numpy as np
-def plot_quantum_circuit(gates,inits={},labels=[],plot_labels=True,**kwargs):
+def plot_quantum_circuit(init_qubits,gates,inits={},labels=[],plot_labels=True,**kwargs):
     """Use Matplotlib to plot a quantum circuit.
     gates     List of tuples for each gate in the quantum circuit.
               (name,target,control1,control2...). Targets and controls initially
@@ -36,7 +36,7 @@ def plot_quantum_circuit(gates,inits={},labels=[],plot_labels=True,**kwargs):
     draw_wires(ax,nq,gate_grid,wire_grid,plot_params,measured)
     
     if plot_labels: 
-        draw_labels(ax,labels,inits,gate_grid,wire_grid,plot_params)
+        draw_labels(ax,labels,inits,gate_grid,wire_grid,plot_params,init_qubits)
 
     draw_gates(ax,gates,labels,gate_grid,wire_grid,plot_params,measured)
     return fig,ax
@@ -189,12 +189,12 @@ def draw_wires(ax,nq,gate_grid,wire_grid,plot_params,measured={}):
         line(ax,gate_grid[j],gate_grid[-1]+scale,wire_grid[i]+dy,wire_grid[i]+dy,plot_params)
     return
 
-def draw_labels(ax,labels,inits,gate_grid,wire_grid,plot_params):
+def draw_labels(ax,labels,inits,gate_grid,wire_grid,plot_params,init_qubits):
     scale = plot_params['scale']
     label_buffer = plot_params['label_buffer']
     fontsize = plot_params['fontsize']
     nq = len(labels)
-    labels = np.zeros(nq)
+    labels = init_qubits
     xdata = (gate_grid[0] - scale, gate_grid[-1] + scale)
     for i in range(nq):
         #j = get_flipped_index(labels[i],labels)

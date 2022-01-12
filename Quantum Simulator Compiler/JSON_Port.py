@@ -5,10 +5,12 @@ from ControlGate import Control_Gate
 from SingleGate import Single_Gate
 def read_json(path):
     f=  open(path,"r")
-    content = f.read()
-    gate_sets = json.loads(content)
+    c = f.read()
+    content = json.loads(c)
     f.close()
-    return  Load_Gate_Sets(gate_sets)
+    return  Load_Init_Qubits(content),Load_Gate_Sets(content)
+def Load_Init_Qubits(content):
+    return list(map(lambda i:int(i),content["init_qubits"]))
 def Load_Gate_Sets(gate_sets):
     sets = copy.deepcopy(gate_sets)
     cir = []
