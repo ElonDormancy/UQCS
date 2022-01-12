@@ -65,7 +65,7 @@ from Init_State import init_vector
 from JSON_Port import read_json,Apply_Gate_Sets
 
 cir = []
-qubits,gate_sets = read_json("./gate_sets.json")
+qubits,gate_sets = read_json("./content.json")
 q = init_vector(qubits)
 write_output(Qcircuit_plot(qubits,gate_sets),"main.tex")
 q,cir = Apply_Gate_Sets(q ,gate_sets)
