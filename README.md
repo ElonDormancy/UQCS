@@ -65,8 +65,10 @@ from Init_State import init_vector
 from JSON_Port import read_json,Apply_Gate_Sets
 
 cir = []
-q = init_vector([0,0,0])
-q,cir = Apply_Gate_Sets(q ,read_json("./gate_sets.json"))
+qubits,gate_sets = read_json("./gate_sets.json")
+q = init_vector(qubits)
+write_output(Qcircuit_plot(qubits,gate_sets),"main.tex")
+q,cir = Apply_Gate_Sets(q ,gate_sets)
 print(q)
 plot_quantum_circuit(cir)
 ```
@@ -80,4 +82,10 @@ plot_quantum_circuit
 
 <p align="center">
     <img src="/doc/QFT3_Load.png" alt="screenshot of load circuit" width="60%"/>
+</p>
+
+Qcircuit
+
+<p align="center">
+    <img src="/doc/QFT3_Load_Qcircuit.png" alt="screenshot of load circuit" width="60%"/>
 </p>
