@@ -6,6 +6,11 @@ The Quantum Simulator Project with for-loop method to apply the single qubit gat
 
 C++ version is able to realize the more effective and the main idea to accelerate the speed of QuantumSimulator is to accelerate the for loop,further,MPI lib or CUDA(Or Other Libs) will in usage.
 
+## User Manual
+[YI](https://github.com/ElonDormancy/QuantumSimulator/wiki/YI)
+
+[Quantum Simulator Compiler](https://github.com/ElonDormancy/QuantumSimulator/wiki/Quantum-Simulator-Compiler-Yi)
+
 ## 易
 
 ### Open Source Package Usage:
