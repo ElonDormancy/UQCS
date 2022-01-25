@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="/doc/icon.png" alt="icon" width="100%"/>
+</p>
+
 # Quantum Simulator
 
 [![](https://img.shields.io/badge/Platform-Python-lightgrey)](https://www.python.org/)  [![](https://img.shields.io/badge/Platform-C%2FC%2B%2B-lightgrey)](https://www.cplusplus.com/)  ![](https://img.shields.io/badge/Platform-Javascript-lightgrey)
@@ -25,7 +29,8 @@ C++ version is able to realize the more effective and the main idea to accelerat
 
 When the number of qubits more than 12,"易" will act as a kit to plot quantum circuit,which then are able to be exported to, for example, [Qiskit](https://www.qiskit.org/) or our own compiler to compile.
 
-Try it out:[易](https://elondormancy.github.io/QuantumSimulator/)
+Try it out:
+[易](https://elondormancy.github.io/QuantumSimulator/)
 
 ### Examples
 
