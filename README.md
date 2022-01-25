@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="/doc/icon.png" alt="icon" width="10%"/>
+    <img src="/doc/title.png" alt="slogan" width="80%"/>
 </p>
 
 # Quantum Simulator
