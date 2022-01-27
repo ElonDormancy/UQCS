@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="/doc/title.png" alt="slogan" width="80%"/>
+    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/title.png" alt="slogan" width="80%"/>
 </p>
 
 # Quantum Simulator
@@ -37,13 +37,13 @@ Try it out:
 Drag to plot
 
 <p align="center">
-    <img src="/doc/drag_demo_1.gif" alt="screenshot of save circuit" width="100%"/>
+    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/drag_demo_1.gif" alt="screenshot of save circuit" width="100%"/>
 </p>
 
 Result:
 
 <p align="center">
-    <img src="/doc/drag_demo_2.gif" alt="screenshot of save circuit" width="100%"/>
+    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/drag_demo_2.gif" alt="screenshot of save circuit" width="100%"/>
 </p>
 
 --
@@ -61,7 +61,7 @@ QFT with three qubits
 Save JSON:
 
 <p align="center">
-    <img src="/doc/QFT3_Save.png" alt="screenshot of save circuit" width="100%"/>
+    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/QFT3_Save.png" alt="screenshot of save circuit" width="100%"/>
 </p>
 
 Load JSON:
@@ -91,11 +91,11 @@ plot_quantum_circuit(cir)
 plot_quantum_circuit
 
 <p align="center">
-    <img src="/doc/QFT3_Load.png" alt="screenshot of load circuit" width="60%"/>
+    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/QFT3_Load.png" alt="screenshot of load circuit" width="60%"/>
 </p>
 
 Qcircuit
 
 <p align="center">
-    <img src="/doc/QFT3_Load_Qcircuit.png" alt="screenshot of load circuit" width="60%"/>
+    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/QFT3_Load_Qcircuit.png" alt="screenshot of load circuit" width="60%"/>
 </p>
