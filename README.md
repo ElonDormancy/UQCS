@@ -25,12 +25,12 @@ C++ version is able to realize the more effective and the main idea to accelerat
 
 ### Introduction
 
-"易(Yi)" is a visualized universial quantum circuits[The limit on the number of qubits is 12] makes it extremely easy to build quantum circuits,intended to help people in about construct quantum circuits.
+"易(UQCS)" is a visualized universial quantum circuits[The limit on the number of qubits is 12] makes it extremely easy to build quantum circuits,intended to help people in about construct quantum circuits.
 
 When the number of qubits more than 12,"易" will act as a kit to plot quantum circuit,which then are able to be exported to, for example, [Qiskit](https://www.qiskit.org/) or our own compiler to compile.
 
 Try it out:
-[易](https://elondormancy.github.io/QuantumSimulator/)
+[UQCS](https://elondormancy.github.io/QuantumSimulator/)
 
 ### Examples
 
