@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/title.png" alt="slogan" width="80%"/>
+    <img src="https://github.com/ElonDormancy/QuantumSimulator/blob/main/doc/title.png" alt="title" width="80%"/>
 </p>
 
 # Quantum Simulator
