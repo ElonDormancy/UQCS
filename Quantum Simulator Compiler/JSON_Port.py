@@ -3,12 +3,14 @@ import copy
 import numpy as np
 from ControlGate import Control_Gate
 from SingleGate import Single_Gate
+
 def read_json(path):
     f=  open(path,"r")
     c = f.read()
     content = json.loads(c)
     f.close()
     return  Load_Init_Qubits(content),Load_Gate_Sets(content)
+
 def Load_Init_Qubits(content):
     return list(map(lambda i:int(i),content["init_qubits"]))
 def Load_Gate_Sets(gate_sets):
@@ -38,6 +40,7 @@ def Load_Gate_Sets(gate_sets):
         cg_infor["gate_infor"] = cg
         gate_timing.append(cg_infor)
     return sorted(gate_timing, key = lambda i: i['order'])
+
 def Apply_Gate_Sets(init_state,gate_timing):
     q = init_state
     cir= []
